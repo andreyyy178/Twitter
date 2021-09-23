@@ -36,6 +36,9 @@ public class TimelineActivity extends AppCompatActivity {
         twitterClient = RestApplication.getRestClient(this);
 
         swipeContainer = findViewById(R.id.swipeContainer);
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
+
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
