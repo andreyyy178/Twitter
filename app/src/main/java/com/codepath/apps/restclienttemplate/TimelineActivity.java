@@ -5,15 +5,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +52,19 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fab = findViewById(R.id.fabCompose);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                   //     .setAction("Action", null).show();
+                //navigate
+
+                startActivity(new Intent(TimelineActivity.this, ComposeActivity.class));
+            }
+        });
+
         //find the recycler view
         rvTweets = findViewById(R.id.rvTweets);
         //init the list of tweets and adapter
@@ -55,6 +73,12 @@ public class TimelineActivity extends AppCompatActivity {
         //recyler view setup: layout manger and the adapter
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(adapter);
+        populateHomeTimeLine();
+    }
+
+    protected void onResume() {
+        super.onResume();
+
         populateHomeTimeLine();
     }
 
